@@ -98,7 +98,7 @@ namespace Task2.Library
         private string HandleOtherFormats(string format, object arg)
         {
             if (arg is IFormattable)
-                return ((IFormattable)arg).ToString(format, CultureInfo.CurrentCulture);
+                return ((IFormattable)arg).ToString(format, parent);
             else if (arg != null)
                 return arg.ToString();
             else
