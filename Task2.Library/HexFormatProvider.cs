@@ -20,8 +20,7 @@ namespace Task2.Library
         }
 
         public HexFormatProvider()
-            : this((IFormatProvider)CultureInfo.CurrentCulture)
- { }
+            : this((IFormatProvider)CultureInfo.CurrentCulture) { }
 
         public object GetFormat(Type formatType)
         {
@@ -32,8 +31,8 @@ namespace Task2.Library
 
         public string Format(string format, object arg, IFormatProvider provider)
         {
-            byte[] bytes = GetBytes(arg);
-            if (bytes != null && format == "H")
+            byte[] bytes;
+            if (GetBytes(arg, out bytes) && format == "H")
             {
                 return GetHexNumber(bytes);
             }
@@ -52,31 +51,35 @@ namespace Task2.Library
 
         }
 
-        private byte[] GetBytes(object arg)
+        private bool GetBytes(object arg, out byte[] bytes)
         {
             if (arg is sbyte)
             {
                 string byteString = ((sbyte)arg).ToString("X2");
-                return new byte[1] { Byte.Parse(byteString, System.Globalization.NumberStyles.HexNumber) };
+                bytes = new byte[1] { Byte.Parse(byteString, System.Globalization.NumberStyles.HexNumber) };
             }
             else if (arg is byte)
-                return new byte[1] { (byte)arg };
+                bytes = new byte[1] { (byte)arg };
             else if (arg is short)
-                return BitConverter.GetBytes((short)arg);
+                bytes = BitConverter.GetBytes((short)arg);
             else if (arg is int)
-                return BitConverter.GetBytes((int)arg);
+                bytes = BitConverter.GetBytes((int)arg);
             else if (arg is long)
-                return BitConverter.GetBytes((long)arg);
+                bytes = BitConverter.GetBytes((long)arg);
             else if (arg is ushort)
-                return BitConverter.GetBytes((ushort)arg);
+                bytes = BitConverter.GetBytes((ushort)arg);
             else if (arg is uint)
-                return BitConverter.GetBytes((uint)arg);
+                bytes = BitConverter.GetBytes((uint)arg);
             else if (arg is ulong)
-                return BitConverter.GetBytes((ulong)arg);
+                bytes = BitConverter.GetBytes((ulong)arg);
             else if (arg is BigInteger)
-                return ((BigInteger)arg).ToByteArray();
+                bytes = ((BigInteger)arg).ToByteArray();
             else
-                return null;
+            {
+                bytes = new byte[0];
+                return false;
+            }
+            return true;
         }
 
         private string GetHexNumber(byte[] bytes)
