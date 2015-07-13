@@ -19,42 +19,40 @@ namespace Task2.Library
             this.parent = parent;
         }
 
-        public HexFormatProvider() 
-            : this(CultureInfo.CurrentCulture) { }
-
+        public HexFormatProvider()
+            : this((IFormatProvider)CultureInfo.CurrentCulture)
+ { }
 
         public object GetFormat(Type formatType)
         {
-            if (formatType == typeof(IFormatProvider))
+            if (formatType == typeof(ICustomFormatter))
                 return this;
             return null;
         }
 
         public string Format(string format, object arg, IFormatProvider provider)
         {
-            if (arg == null || format != "H")
-                return string.Format(parent, "{0:" + format + "}");
-
             byte[] bytes = GetBytes(arg);
-            
-            if (bytes != null)
+            if (bytes != null && format == "H")
             {
-                string result = string.Empty;
-                int[] digits = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-                for (int i = bytes.GetUpperBound(0); i >= bytes.GetLowerBound(0); i--)
+                return GetHexNumber(bytes);
+            }
+            else
+            {
+                try
                 {
-                    result = result + hexDigits[Array.IndexOf(digits, bytes[i] / 16)]
-                        + hexDigits[Array.IndexOf(digits, bytes[i] % 16)];
+                    return HandleOtherFormats(format, arg);
+                }
+                catch (FormatException e)
+                {
+                    throw new FormatException(String.Format("The format of '{0}' is invalid.", format), e);
                 }
             }
-
-
-
-            return String.Empty;
+        
 
         }
 
-        private static byte[] GetBytes(object arg)
+        private byte[] GetBytes(object arg)
         {
             if (arg is sbyte)
             {
@@ -79,6 +77,32 @@ namespace Task2.Library
                 return ((BigInteger)arg).ToByteArray();
             else
                 return null;
+        }
+
+        private string GetHexNumber(byte[] bytes)
+        {
+            string result = string.Empty;
+            int[] digits = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            for (int i = bytes.GetUpperBound(0); i >= bytes.GetLowerBound(0); i--)
+            {
+                char firstHexDigitInByte = hexDigits[Array.IndexOf(digits, bytes[i] / 16)];
+                char lastHexDigitInByte = hexDigits[Array.IndexOf(digits, bytes[i] % 16)];
+                if (result != string.Empty || firstHexDigitInByte != '0')
+                    result += firstHexDigitInByte;
+                if (result != string.Empty || lastHexDigitInByte != '0')
+                    result += lastHexDigitInByte;
+            }
+            return result;
+        }
+
+        private string HandleOtherFormats(string format, object arg)
+        {
+            if (arg is IFormattable)
+                return ((IFormattable)arg).ToString(format, CultureInfo.CurrentCulture);
+            else if (arg != null)
+                return arg.ToString();
+            else
+                return String.Empty;
         }
     }
 }

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task1.Library", "..\ASP.NET
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2.Library", "Task2.Library\Task2.Library.csproj", "{26B52A77-613D-4D2C-93FA-19EB460FAE1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2.Test", "Task2.Test\Task2.Test.csproj", "{9EB2CC27-AFE4-4F6B-9F9A-1711297F9CC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{26B52A77-613D-4D2C-93FA-19EB460FAE1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26B52A77-613D-4D2C-93FA-19EB460FAE1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26B52A77-613D-4D2C-93FA-19EB460FAE1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EB2CC27-AFE4-4F6B-9F9A-1711297F9CC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EB2CC27-AFE4-4F6B-9F9A-1711297F9CC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EB2CC27-AFE4-4F6B-9F9A-1711297F9CC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EB2CC27-AFE4-4F6B-9F9A-1711297F9CC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

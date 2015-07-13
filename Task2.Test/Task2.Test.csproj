@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{62ACA3E7-3EA9-483D-8E1F-5A941F583D13}</ProjectGuid>
+    <ProjectGuid>{9EB2CC27-AFE4-4F6B-9F9A-1711297F9CC8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Task1.Test</RootNamespace>
-    <AssemblyName>Task1.Test</AssemblyName>
+    <RootNamespace>Task2.Test</RootNamespace>
+    <AssemblyName>Task2.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,13 +50,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="NewtonTest.cs" />
+    <Compile Include="HexFormatProviderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ASP.NET.Popok.Day1\Task1.Library\Task1.Library.csproj">
-      <Project>{6c4a157f-0c71-430e-aa9b-494bf8a24298}</Project>
-      <Name>Task1.Library</Name>
+    <ProjectReference Include="..\Task2.Library\Task2.Library.csproj">
+      <Project>{26b52a77-613d-4d2c-93fa-19eb460fae1d}</Project>
+      <Name>Task2.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

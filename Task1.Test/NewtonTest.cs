@@ -5,7 +5,7 @@ using Task1.Library;
 namespace Task1.Test
 {
     [TestClass]
-    public class UnitTestNewton
+    public class NewtonTest
     {
         [TestMethod]
         public void RadicalTest()
