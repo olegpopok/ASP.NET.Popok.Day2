@@ -90,11 +90,6 @@ namespace Task2.Library
             {
                 char firstHexDigitInByte = hexDigits[Array.IndexOf(digits, bytes[i] / 16)];
                 char lastHexDigitInByte = hexDigits[Array.IndexOf(digits, bytes[i] % 16)];
-                /*
-                if (result != string.Empty || firstHexDigitInByte != '0')
-                    result += firstHexDigitInByte;
-                if (result != string.Empty || lastHexDigitInByte != '0')
-                    result += lastHexDigitInByte;*/
                 result = result + firstHexDigitInByte + lastHexDigitInByte;
             }
             return result.TrimStart('0');
